@@ -9,16 +9,8 @@ public class Time {
 		return minute;
 	}
 
-	public void setMinute(int minute) {
-		this.minute = minute;
-	}
-
 	public int getSeconds() {
 		return seconds;
-	}
-
-	public void setSeconds(int seconds) {
-		this.seconds = seconds;
 	}
 
 	public Time(String s) {

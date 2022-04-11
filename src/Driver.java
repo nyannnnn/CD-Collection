@@ -91,6 +91,9 @@ public class Driver {
 				String genre = inFile.readLine();
 				int rating = Integer.parseInt(inFile.readLine());
 				String time = inFile.readLine();
+				if (time.length()<=2) {
+					cd.addSong(new Song(songTitle, artist, genre, rating, new Time(Integer.parseInt(time))));
+				}
 				cd.addSong(new Song(songTitle, artist, genre, rating, new Time(time)));
 			}
 			CDList.add(cd);

@@ -20,7 +20,4 @@ public class CD {
 		SongList.add(s);
 	}
 	
-	public int addTime(Time t) {
-		
-	}
 }
