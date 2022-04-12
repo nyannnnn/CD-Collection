@@ -67,11 +67,15 @@ public class Driver {
 					} 
 					else if (subMenuChoice == 2) {
 						try {
-							int num = Integer.parseInt(sc.nextLine());+
+							System.out.print("Enter the CD you want to access: ");
+							int num = Integer.parseInt(sc.nextLine()) - 1;
+							if(num > CDList.size()-1) {
+								throw new NumberFormatException();
+							}
+							displayCD(num, CDList);
 						}catch(NumberFormatException e) {
-							System.out.println("The CD does not exist");
+							System.out.println("This CD does not exist");
 						}
-						displayCD(CDList);
 					}
 					else if (subMenuChoice == 3) {
 						System.out.print("Enter the file name: ");
