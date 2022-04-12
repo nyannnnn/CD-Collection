@@ -6,6 +6,50 @@ public class Song {
 	private String genre;
 	private int rating;
 	private Time time;
+	
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public String getArtist() {
+		return artist;
+	}
+
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+
+	public String getGenre() {
+		return genre;
+	}
+
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+
+	public int getRating() {
+		return rating;
+	}
+
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+
+	public Time getTime() {
+		return time;
+	}
 
 	public Song(String title, String artist, String genre, int rating, Time time) {
 		this.title = title;
@@ -15,6 +59,7 @@ public class Song {
 		this.time = time;
 	}
 
+	
 	public int convertMin()
 	{
 		return time.getMinute()*60+time.getSeconds();

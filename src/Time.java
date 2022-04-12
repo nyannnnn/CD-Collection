@@ -23,8 +23,14 @@ public class Time {
 		this.seconds = n;
 	}
 	
+	public void add(Time t) {
+		int add = this.minute * 60 + this.seconds + t.minute*60 + t.seconds;
+		this.minute = add/60;
+		this.seconds = add%60;
+	}
+	
 	public String toString() {
-		return String.format("%d:%d", minute, seconds);
+		return String.format("%02d:%02d", minute, seconds);
 	}
 	
 }

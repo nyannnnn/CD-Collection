@@ -45,53 +45,119 @@ public class Driver {
 		Scanner sc = new Scanner(System.in);
 		ArrayList<CD> CDList = new ArrayList<>();
 
-		int mainMenuChoice, subMenuChoice;
+		int mainMenuChoice = 0, subMenuChoice = 0;
 
 		while (true) {
-			mainMenuChoice = displayMenu(0, stdIn);
+			try {
+				mainMenuChoice = displayMenu(0, stdIn);
+			} catch (NumberFormatException e) {
+				System.out.println("That choice was not a number");
+				continue;
+			}
 			if (mainMenuChoice == 1) {
 				while (true) {
-					subMenuChoice = displayMenu(1, stdIn);
+					try {
+						subMenuChoice = displayMenu(1, stdIn);
+					} catch (NumberFormatException e) {
+						System.out.println("That choice was not a number");
+						continue;
+					}
 					if (subMenuChoice == 1) {
 						listCD(CDList);
+					} 
+					else if (subMenuChoice == 2) {
+						try {
+							int num = Integer.parseInt(sc.nextLine());+
+						}catch(NumberFormatException e) {
+							System.out.println("The CD does not exist");
+						}
+						displayCD(CDList);
 					}
-					if (subMenuChoice == 3) {
+					else if (subMenuChoice == 3) {
+						System.out.print("Enter the file name: ");
 						String name = sc.nextLine();
 						addCD(name, CDList);
+					} else if (subMenuChoice == 8) {
+						break;
+					} else {
+						System.out.println("Choice does not exist, please re-enter");
 					}
 				}
 			} else if (mainMenuChoice == 2) {
-				subMenuChoice = displayMenu(2, stdIn);
+				int choice = 0;
+				listCD(CDList);
+				if (CDList.size() == 0) {
+					System.out.println("CDList is empty, please go to submenu 1");
+					continue;
+				}
+				System.out.print("Enter the # of the CD you want to access: ");
+				while (true) {
+					choice = Integer.parseInt(sc.nextLine());
+					if (choice > CDList.size()) {
+						System.out.println("CD #" + choice + "does not exist");
+					} else {
+						choice--;
+						break;
+					}
+				}
+				while (true) {
+					subMenuChoice = displayMenu(2, stdIn);
+					System.out.println();
+					if (subMenuChoice == 1) {
+						CDList.get(choice).displayAllSongs();
+					} else if (subMenuChoice == 2) {
+						System.out.print("Enter the song that you want to display: ");
+						int song = Integer.parseInt(sc.nextLine());
+						CDList.get(choice).displaySong(song);
+						System.out.println();
+					} else if (subMenuChoice == 6) {
+						break;
+					} else {
+						System.out.println("Choice does not exist, please re-enter");
+					}
+				}
 			} else if (mainMenuChoice == 3) {
 				break;
+			} else {
+				System.out.println("Choice does not exist, please re-enter");
 			}
 		}
 
 	}
 
 	public static void displayCD(int index, ArrayList<CD> CDList) {
-		System.out.println(CDList.get(index));
+		if (CDList.size() < 1) {
+			System.out.println("CDList is empty");
+		} else {
+			System.out.println(CDList.get(index));
+		}
 	}
 
 	public static void listCD(ArrayList<CD> CDList) {
-		for (CD c : CDList) {
-			System.out.println(c);
+		if (CDList.size() < 1) {
+			System.out.println("CDList is empty");
+		} else {
+			int i = 1;
+			for (CD c : CDList) {
+				System.out.println("CD # " + i + c.getTitle());
+				i++;
+			}
 		}
 	}
 
 	public static void addCD(String name, ArrayList<CD> CDList) {
 		try {
-			BufferedReader inFile = new BufferedReader(new FileReader(name + ".txt"));
+			BufferedReader inFile = new BufferedReader(new FileReader(name.toLowerCase() + ".txt"));
 			String title = inFile.readLine();
 			int numSong = Integer.parseInt(inFile.readLine());
 			CD cd = new CD(title, numSong);
-			for(int i = 0; i < numSong; i++) {
+			for (int i = 0; i < numSong; i++) {
 				String songTitle = inFile.readLine();
 				String artist = inFile.readLine();
 				String genre = inFile.readLine();
 				int rating = Integer.parseInt(inFile.readLine());
 				String time = inFile.readLine();
-				if (time.length()<=2) {
+				if (time.length() <= 2) {
 					cd.addSong(new Song(songTitle, artist, genre, rating, new Time(Integer.parseInt(time))));
 				}
 				cd.addSong(new Song(songTitle, artist, genre, rating, new Time(time)));
@@ -106,4 +172,5 @@ public class Driver {
 		}
 
 	}
+
 }
