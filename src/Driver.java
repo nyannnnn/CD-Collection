@@ -94,6 +94,14 @@ public class Driver {
 						listCD(CDList);
 						System.out.println("Enter the CD index you want to copy");
 						int num = Integer.parseInt(sc.nextLine()) - 1;
+						copyCD(num, CDList);
+					}
+					else if(subMenuChoice == 6) {
+						listCD(CDList);
+						System.out.print("Enter the sub CD starting index: ");
+						int starting = Integer.parseInt(sc.nextLine()) - 1;
+						System.out.print("Enter the sub CD ending index: ");
+						int ending = Integer.parseInt(sc.nextLine()) - 1;
 						
 					}
 					else if (subMenuChoice == 8) {
@@ -148,7 +156,12 @@ public class Driver {
 	}
 
 	public static void copyCD(int index, ArrayList<CD> CDList) {
-		
+		try {
+			CDList.add(CDList.get(index));
+		}
+		catch(IndexOutOfBoundsException e) {
+			System.out.println("The CD does not exist");
+		}
 	}
 	
 	public static void removeCD(int index, ArrayList<CD> CDList) {
