@@ -54,6 +54,7 @@ public class Driver {
 				System.out.println("That choice was not a number");
 				continue;
 			}
+			//MENU 1
 			if (mainMenuChoice == 1) {
 				while (true) {
 					try {
@@ -67,6 +68,7 @@ public class Driver {
 					} 
 					else if (subMenuChoice == 2) {
 						try {
+							listCD(CDList);
 							System.out.print("Enter the CD you want to access: ");
 							int num = Integer.parseInt(sc.nextLine()) - 1;
 							if(num > CDList.size()-1) {
@@ -81,13 +83,28 @@ public class Driver {
 						System.out.print("Enter the file name: ");
 						String name = sc.nextLine();
 						addCD(name, CDList);
-					} else if (subMenuChoice == 8) {
+					} 
+					else if (subMenuChoice == 4) {
+						listCD(CDList);
+						System.out.print("Enter the CD index: ");
+						int num = Integer.parseInt(sc.nextLine()) - 1;
+						removeCD(num, CDList);
+					}
+					else if(subMenuChoice == 5) {
+						listCD(CDList);
+						System.out.println("Enter the CD index you want to copy");
+						int num = Integer.parseInt(sc.nextLine()) - 1;
+						
+					}
+					else if (subMenuChoice == 8) {
 						break;
 					} else {
 						System.out.println("Choice does not exist, please re-enter");
 					}
 				}
-			} else if (mainMenuChoice == 2) {
+			} 
+			//MENU 2
+			else if (mainMenuChoice == 2) {
 				int choice = 0;
 				listCD(CDList);
 				if (CDList.size() == 0) {
@@ -110,6 +127,7 @@ public class Driver {
 					if (subMenuChoice == 1) {
 						CDList.get(choice).displayAllSongs();
 					} else if (subMenuChoice == 2) {
+						CDList.get(choice).displayAllSongs();
 						System.out.print("Enter the song that you want to display: ");
 						int song = Integer.parseInt(sc.nextLine());
 						CDList.get(choice).displaySong(song);
@@ -127,6 +145,20 @@ public class Driver {
 			}
 		}
 
+	}
+
+	public static void copyCD(int index, ArrayList<CD> CDList) {
+		
+	}
+	
+	public static void removeCD(int index, ArrayList<CD> CDList) {
+		try {
+			
+			CDList.remove(index);
+			
+		}catch(IndexOutOfBoundsException e) {
+			System.out.println("The CD does not exist");
+		}
 	}
 
 	public static void displayCD(int index, ArrayList<CD> CDList) {
