@@ -157,6 +157,7 @@ public class Driver {
 
 	public static void copyCD(int index, ArrayList<CD> CDList) {
 		try {
+			//use for loop to copy everything
 			CDList.add(CDList.get(index));
 		}
 		catch(IndexOutOfBoundsException e) {
