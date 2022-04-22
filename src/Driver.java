@@ -150,7 +150,20 @@ public class Driver {
 						int song = Integer.parseInt(sc.nextLine());
 						CDList.get(choice).displaySong(song);
 						System.out.println();
-					} else if (subMenuChoice == 6) {
+					}
+					else if(subMenuChoice == 3) {
+						
+						System.out.print("Enter the song title");
+						
+						System.out.print("Enter the song artist");
+						System.out.print("Enter the song genre");
+						System.out.print("Enter the song rating (out of 5): ");
+						int start = Integer.parseInt(sc.nextLine()) - 1;
+
+						System.out.print("Enter the time (mm:ss): ");
+						
+					}
+					else if (subMenuChoice == 6) {
 						break;
 					} else {
 						System.out.println("Choice does not exist, please re-enter");
