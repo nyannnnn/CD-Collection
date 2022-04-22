@@ -64,6 +64,7 @@ public class Song {
 	{
 		return time.getMinute()*60+time.getSeconds();
 	}
+	
 	public String toString() {
 		return String.format("Song Title: %s%nArtist: %s%nGenre: %s%nRating: %d%nTime: %s%n", this.title, this.artist,
 				this.genre, this.rating, this.time.toString());

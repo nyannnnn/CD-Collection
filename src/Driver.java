@@ -99,9 +99,11 @@ public class Driver {
 					else if(subMenuChoice == 6) {
 						listCD(CDList);
 						System.out.print("Enter the sub CD starting index: ");
-						int starting = Integer.parseInt(sc.nextLine()) - 1;
+						int num = Integer.parseInt(sc.nextLine()) - 1;
+						System.out.print("Enter the sub CD starting index: ");
+						int starting = Integer.parseInt(sc.nextLine());
 						System.out.print("Enter the sub CD ending index: ");
-						int ending = Integer.parseInt(sc.nextLine()) - 1;
+						int ending = Integer.parseInt(sc.nextLine());
 						
 					}
 					else if (subMenuChoice == 8) {
@@ -155,10 +157,25 @@ public class Driver {
 
 	}
 
+	public static void subCD(int num, int starting, int ending, ArrayList<CD> CDList) {
+		
+		try {
+			CD copy = new CD("sub " + CDList.get(ending), ending - starting);
+			for(int i = starting-1; i <= ending; i++) {
+				copy.addSong(CDList.get(i).getSongList().get(starting));
+			}
+			CDList.add(copy);
+		}
+		catch(IndexOutOfBoundsException e) {
+			System.out.println("The indexs are out of bound");
+		}
+		
+	}
+	
 	public static void copyCD(int index, ArrayList<CD> CDList) {
 		try {
-			//use for loop to copy everything
-			CDList.add(CDList.get(index));
+			CD copy = new CD(CDList.get(index));
+			CDList.add(copy);			
 		}
 		catch(IndexOutOfBoundsException e) {
 			System.out.println("The CD does not exist");

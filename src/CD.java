@@ -11,11 +11,30 @@ public class CD {
 		return this.title;
 	}
 	
+	public int getNumSong() {
+		return this.numSong;
+	}
+		
+	public ArrayList<Song> getSongList() {
+		return SongList;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
 	public CD(String title, int numSong) {
 		this.title = title;
 		this.numSong = numSong;
 		this.SongList = new ArrayList<Song>();
 		this.time = new Time(0);
+	}
+	
+	public CD(CD c) {
+		this.title = "copy " + c.getTitle();
+		this.numSong = c.getNumSong();
+		this.SongList = new ArrayList<>(c.getSongList());
+		this.time = c.getTime();
 	}
 	
 	public String toString() {
@@ -32,6 +51,8 @@ public class CD {
 			System.out.println("#" + (i+1) + " " + SongList.get(i).getTitle());
 		}
 	}
+	
+	
 	
 	public void displaySong(int index) {
 		System.out.println(this.SongList.get(index));
