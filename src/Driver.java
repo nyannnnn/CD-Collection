@@ -92,19 +92,19 @@ public class Driver {
 					}
 					else if(subMenuChoice == 5) {
 						listCD(CDList);
-						System.out.println("Enter the CD index you want to copy");
+						System.out.print("Enter the CD index you want to copy: ");
 						int num = Integer.parseInt(sc.nextLine()) - 1;
 						copyCD(num, CDList);
 					}
 					else if(subMenuChoice == 6) {
 						listCD(CDList);
-						System.out.print("Enter the sub CD starting index: ");
+						System.out.print("Enter the CD index you want to copy: ");
 						int num = Integer.parseInt(sc.nextLine()) - 1;
-						System.out.print("Enter the sub CD starting index: ");
+						System.out.print("Enter the sub CD starting song: ");
 						int starting = Integer.parseInt(sc.nextLine());
-						System.out.print("Enter the sub CD ending index: ");
+						System.out.print("Enter the sub CD ending song: ");
 						int ending = Integer.parseInt(sc.nextLine());
-						
+						subCD(num, starting, ending, CDList);
 					}
 					else if (subMenuChoice == 8) {
 						break;
@@ -157,12 +157,29 @@ public class Driver {
 
 	}
 
+	public static void listComm(int index1, int index2, ArrayList<CD> CDList) {
+		 
+		try {
+			
+			CD c1 = CDList.get(index1);
+			CD c2 = CDList.get(index2);
+			
+			int index = Math.min(c1.getNumSong(), c2.getNumSong());
+			
+			
+		}
+		catch(IndexOutOfBoundsException e) {
+			System.out.println("The indexs are out of bound");
+		}
+		
+	}
+	
 	public static void subCD(int num, int starting, int ending, ArrayList<CD> CDList) {
 		
 		try {
-			CD copy = new CD("sub " + CDList.get(ending), ending - starting);
-			for(int i = starting-1; i <= ending; i++) {
-				copy.addSong(CDList.get(i).getSongList().get(starting));
+			CD copy = new CD(("sub " + CDList.get(num).getTitle()), (ending - starting + 1));
+			for(int i = starting-1; i < ending; i++) {
+				copy.addSong(CDList.get(num).getSongList().get(i));
 			}
 			CDList.add(copy);
 		}
@@ -206,9 +223,10 @@ public class Driver {
 		} else {
 			int i = 1;
 			for (CD c : CDList) {
-				System.out.println("CD # " + i + c.getTitle());
+				System.out.println("CD# " + i + " " + c.getTitle());
 				i++;
 			}
+			System.out.println();
 		}
 	}
 
