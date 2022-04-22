@@ -106,6 +106,14 @@ public class Driver {
 						int ending = Integer.parseInt(sc.nextLine());
 						subCD(num, starting, ending, CDList);
 					}
+					else if(subMenuChoice == 7) {
+						listCD(CDList);
+						System.out.print("Enter the first CD index: ");
+						int start = Integer.parseInt(sc.nextLine()) - 1;
+						System.out.print("Enter the second CD index: ");
+						int end = Integer.parseInt(sc.nextLine()) - 1;
+						listComm(start, end, CDList);
+					}
 					else if (subMenuChoice == 8) {
 						break;
 					} else {
@@ -166,7 +174,12 @@ public class Driver {
 			
 			int index = Math.min(c1.getNumSong(), c2.getNumSong());
 			
-			
+			for(int i = 0; i < index; i++) {
+				//comparing address
+				if(c2.getSongList().contains(c1.getSongList().get(i))) {
+					System.out.println(c1.getSongList().get(i));
+				}
+			}
 		}
 		catch(IndexOutOfBoundsException e) {
 			System.out.println("The indexs are out of bound");

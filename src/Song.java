@@ -59,6 +59,10 @@ public class Song {
 		this.time = time;
 	}
 
+	public boolean equals(Object o) {
+		Song s = (Song) o;
+		return this.title.equalsIgnoreCase(s.getTitle());
+	}
 	
 	public int convertMin()
 	{
