@@ -1,5 +1,5 @@
 
-public class Song {
+public class Song implements Comparable<Song>{
 
 	private String title;
 	private String artist;
@@ -64,14 +64,21 @@ public class Song {
 		return this.title.equalsIgnoreCase(s.getTitle());
 	}
 	
-	public int convertMin()
+	public int convert()
 	{
-		return time.getMinute()*60+time.getSeconds();
+		return time.getMinute() * 60 + time.getSeconds();
 	}
 	
 	public String toString() {
 		return String.format("Song Title: %s%nArtist: %s%nGenre: %s%nRating: %d%nTime: %s%n", this.title, this.artist,
 				this.genre, this.rating, this.time.toString());
+	}
+
+	//compare title
+	public int compareTo(Song o) {
+
+		return this.title.compareTo(o.getTitle());
+	
 	}
 	
 }

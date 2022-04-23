@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CD {
 
@@ -44,18 +45,29 @@ public class CD {
 	public void addSong(Song s) {
 		SongList.add(s);
 		this.time.add(s.getTime());
+		numSong++;
 	}
 	
 	public void displayAllSongs() {
+		System.out.println();
 		for(int i = 0; i < this.SongList.size(); i++) {
 			System.out.println("#" + (i+1) + " " + SongList.get(i).getTitle());
 		}
+		System.out.println();
 	}
 	
+	public void removeSongNum(int index) {
+		SongList.remove(index);
+		//implement subtracting time
+		numSong--;
+	}
 	
+	public void sortTitle() {
+		Collections.sort(SongList);
+	}
 	
 	public void displaySong(int index) {
-		System.out.println(this.SongList.get(index));
+		System.out.println(this.SongList.get(index-1));
 	}
 	
 }

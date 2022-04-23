@@ -14,7 +14,7 @@ public class Time {
 	}
 
 	public Time(String s) {
-		minute = minute +Integer.parseInt(s.substring(0, s.length()-3));
+		minute = minute + Integer.parseInt(s.substring(0, s.length()-3));
 		seconds = seconds + Integer.parseInt(s.substring(s.length()-2));
 	}
 	
@@ -24,9 +24,9 @@ public class Time {
 	}
 	
 	public void add(Time t) {
-		int add = this.minute * 60 + this.seconds + t.minute*60 + t.seconds;
-		this.minute = add/60;
-		this.seconds = add%60;
+		int add = this.minute * 60 + this.seconds + t.minute * 60 + t.seconds;
+		this.minute = add / 60;
+		this.seconds = add % 60;
 	}
 	
 	public String toString() {
