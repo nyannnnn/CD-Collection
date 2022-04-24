@@ -29,6 +29,12 @@ public class Time {
 		this.seconds = add % 60;
 	}
 	
+	public void minus(Time t) {
+		int minus = this.minute * 60 + this.seconds - t.minute * 60 - t.seconds;
+		this.minute = minus / 60;
+		this.seconds = minus % 60;
+	}
+	
 	public String toString() {
 		return String.format("%02d:%02d", minute, seconds);
 	}

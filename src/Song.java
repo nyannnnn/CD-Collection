@@ -77,7 +77,7 @@ public class Song implements Comparable<Song>{
 	//compare title
 	public int compareTo(Song o) {
 
-		return this.title.compareTo(o.getTitle());
+		return this.title.compareToIgnoreCase(o.getTitle());
 	
 	}
 	
