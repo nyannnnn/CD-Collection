@@ -184,7 +184,7 @@ public class Driver {
 					} else if (subMenuChoice == 4) {
 						while (true) {
 							System.out.print(
-									"1: Remove by song # \n2:Remove by song title \n3:Remove first song \n4:Remove last song \nEnter your choice: ");
+									"1:Remove by song # \n2:Remove by song title \n3:Remove first song \n4:Remove last song \nEnter your choice: ");
 							int option = Integer.parseInt(sc.nextLine());
 							if (option == 1) {
 								CDList.get(choice).displayAllSongs();
@@ -197,6 +197,7 @@ public class Driver {
 								System.out.print("Enter the song title you want to remove: ");
 								String title = sc.nextLine();
 								CDList.get(choice).removeTitle(title);
+								break;
 							} else if (option == 3) {
 								CDList.get(choice).removeSongNum(1);
 								System.out.println("Song removed");
