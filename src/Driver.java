@@ -1,8 +1,16 @@
+//******************************************************************
+//Name: Max Luo
+//Date: 4/25/2022
+//Description: This program reads in several cd files and allows the user to change, remove, add and access the cds
+//******************************************************************
 import java.io.*;
 import java.util.*;
 
 public class Driver {
 
+	// Description: displays the main menu, sub-menu #1, and sub-menu #2
+	// parameters: int menuNum and BufferedReader stdIn
+	// return: nothing because the method is void
 	public static int displayMenu(int menuNum, BufferedReader stdIn) throws IOException {
 
 		if (menuNum == 0) {
@@ -41,12 +49,14 @@ public class Driver {
 	}
 
 	public static void main(String[] args) throws IOException {
+		//initializing
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(System.in);
 		ArrayList<CD> CDList = new ArrayList<>();
 
 		int mainMenuChoice = 0, subMenuChoice = 0;
 
+		//main loop
 		while (true) {
 			try {
 				mainMenuChoice = displayMenu(0, stdIn);
@@ -63,13 +73,18 @@ public class Driver {
 						System.out.println("That choice was not a number");
 						continue;
 					}
+					//List CD
 					if (subMenuChoice == 1) {
 						listCD(CDList);
-					} else if (subMenuChoice == 2) {
+					}
+					//display information for a particular CD
+					else if (subMenuChoice == 2) {
+						//error checking
 						try {
 							listCD(CDList);
 							System.out.print("Enter the CD you want to access: ");
 							int num = Integer.parseInt(sc.nextLine()) - 1;
+							//if the CD does not exist
 							if (num > CDList.size() - 1) {
 								throw new NumberFormatException();
 							}
@@ -77,30 +92,45 @@ public class Driver {
 						} catch (NumberFormatException e) {
 							System.out.println("This CD does not exist");
 						}
-					} else if (subMenuChoice == 3) {
+					}
+					//Add a CD
+					else if (subMenuChoice == 3) {
 						System.out.print("Enter the file name: ");
 						String name = sc.nextLine();
 						addCD(name, CDList);
-					} else if (subMenuChoice == 4) {
+					} 
+					//Remove a CD
+					else if (subMenuChoice == 4) {
 						listCD(CDList);
 						System.out.print("Enter the CD index: ");
 						int num = Integer.parseInt(sc.nextLine()) - 1;
 						removeCD(num, CDList);
-					} else if (subMenuChoice == 5) {
+					} 
+					//Copy a CD
+					else if (subMenuChoice == 5) {
 						listCD(CDList);
 						System.out.print("Enter the CD index you want to copy: ");
 						int num = Integer.parseInt(sc.nextLine()) - 1;
 						copyCD(num, CDList);
-					} else if (subMenuChoice == 6) {
+					} 
+					//Sub CD
+					else if (subMenuChoice == 6) {
 						listCD(CDList);
-						System.out.print("Enter the CD index you want to copy: ");
-						int num = Integer.parseInt(sc.nextLine()) - 1;
-						System.out.print("Enter the sub CD starting song: ");
-						int starting = Integer.parseInt(sc.nextLine());
-						System.out.print("Enter the sub CD ending song: ");
-						int ending = Integer.parseInt(sc.nextLine());
-						subCD(num, starting, ending, CDList);
-					} else if (subMenuChoice == 7) {
+						//error checking
+						try {
+							System.out.print("Enter the CD index you want to copy: ");
+							int num = Integer.parseInt(sc.nextLine()) - 1;
+							System.out.print("Enter the sub CD starting song: ");
+							int starting = Integer.parseInt(sc.nextLine());
+							System.out.print("Enter the sub CD ending song: ");
+							int ending = Integer.parseInt(sc.nextLine());
+							subCD(num, starting, ending, CDList);
+						} catch(NumberFormatException e) {
+							System.out.println("Invalid Input, please re enter");
+						}
+					} 
+					//List common
+					else if (subMenuChoice == 7) {
 						listCD(CDList);
 						System.out.print("Enter the first CD index: ");
 						int start = Integer.parseInt(sc.nextLine()) - 1;
@@ -135,22 +165,33 @@ public class Driver {
 				while (true) {
 					subMenuChoice = displayMenu(2, stdIn);
 					System.out.println();
+					//Display all songs
 					if (subMenuChoice == 1) {
 						CDList.get(choice).displayAllSongs();
-					} else if (subMenuChoice == 2) {
+					}
+					//Display specific song
+					else if (subMenuChoice == 2) {
 						CDList.get(choice).displayAllSongs();
-						System.out.print("Enter the song that you want to display: ");
-						int song = Integer.parseInt(sc.nextLine());
-						CDList.get(choice).displaySong(song);
+						try {
+							System.out.print("Enter the song that you want to display: ");
+							int song = Integer.parseInt(sc.nextLine());
+							CDList.get(choice).displaySong(song);
+						}catch(NumberFormatException e) {
+							System.out.println("Invalid input, please re enter");
+						}
 						System.out.println();
-					} else if (subMenuChoice == 3) {
+					} 
+					//Add a song
+					else if (subMenuChoice == 3) {
 						String title = "";
 						String artist = "";
 						String genre = "";
 						int rating = 0;
 						String time = "";
-
+						
+						//error checking
 						while (true) {
+							//inputting song details
 							System.out.print("Enter the song title: ");
 							title = sc.nextLine();
 							System.out.print("Enter the song artist: ");
@@ -181,7 +222,10 @@ public class Driver {
 							break;
 						}
 						addASong(title, artist, genre, rating, time, CDList.get(choice));
-					} else if (subMenuChoice == 4) {
+					} 
+					//Remove a song
+					else if (subMenuChoice == 4) {
+						//error checking
 						while (true) {
 							System.out.print(
 									"1:Remove by song # \n2:Remove by song title \n3:Remove first song \n4:Remove last song \nEnter your choice: ");
@@ -207,8 +251,14 @@ public class Driver {
 								System.out.println("Song removed");
 								break;
 							}
+							else {
+								System.out.println("The choice does not exist");
+							}
 						}
-					} else if (subMenuChoice == 5) {
+					} 
+					//Sort songList
+					else if (subMenuChoice == 5) {
+						//error checking
 						while(true) {
 							System.out.print("1: Sort by Title\n2: Sort by artist\n3: Sort by time\n\nEnter your choice: ");
 							int option = Integer.parseInt(sc.nextLine());
@@ -227,6 +277,9 @@ public class Driver {
 								CDList.get(choice).displayAllSongs();
 								break;
 							}
+							else {
+								System.out.println("The choice does not exist");
+							}
 						}
 					} else if (subMenuChoice == 6) {
 						break;
@@ -243,10 +296,16 @@ public class Driver {
 
 	}
 
+	// Description: adds a song to the CD object
+	// parameters: String title, String artist, String genre, int rating, String time (mm:ss), and object CD
+	// return: nothing because the method is void
 	public static void addASong(String title, String artist, String genre, int rating, String time, CD cd) {
 		cd.addSong(new Song(title, artist, genre, rating, new Time(time)));
 	}
 
+	// Description: lists common songs 
+	// parameters: int index1, int index2, and arraylist of CD
+	// return: nothing because the method is void
 	public static void listComm(int index1, int index2, ArrayList<CD> CDList) {
 
 		try {
@@ -268,10 +327,13 @@ public class Driver {
 
 	}
 
+	// Description: given the starting index and ending index, creates a sub CD with songs between indexs 
+	// parameters: int num, int starting, int ending, and arraylist of CD
+	// return: nothing because the method is void
 	public static void subCD(int num, int starting, int ending, ArrayList<CD> CDList) {
 
 		try {
-			CD copy = new CD(("sub " + CDList.get(num).getTitle()), (ending - starting + 1));
+			CD copy = new CD(("sub " + CDList.get(num).getTitle()), (ending - starting));
 			for (int i = starting - 1; i < ending; i++) {
 				copy.addSong(CDList.get(num).getSongList().get(i));
 			}
@@ -282,6 +344,9 @@ public class Driver {
 
 	}
 
+	// Description: copies a CD at a given index 
+	// parameters: int index, arraylist of CD
+	// return: nothing because the method is void
 	public static void copyCD(int index, ArrayList<CD> CDList) {
 		try {
 			CD copy = new CD(CDList.get(index));
@@ -291,6 +356,9 @@ public class Driver {
 		}
 	}
 
+	// Description: removes a CD at a given index 
+	// parameters: int index, arraylist of CD
+	// return: nothing because the method is void
 	public static void removeCD(int index, ArrayList<CD> CDList) {
 		try {
 
@@ -301,6 +369,9 @@ public class Driver {
 		}
 	}
 
+	// Description: displays a CD at a given index 
+	// parameters: int index, arraylist of CD
+	// return: nothing because the method is void
 	public static void displayCD(int index, ArrayList<CD> CDList) {
 		if (CDList.size() < 1) {
 			System.out.println("CDList is empty");
@@ -309,12 +380,16 @@ public class Driver {
 		}
 	}
 
+	// Description: lists all CD 
+	// parameters: arraylist of CD
+	// return: nothing because the method is void
 	public static void listCD(ArrayList<CD> CDList) {
 		System.out.println();
 		if (CDList.size() < 1) {
 			System.out.println("CDList is empty");
 		} else {
 			int i = 1;
+			//for each loop to print out the CDs
 			for (CD c : CDList) {
 				System.out.println("CD# " + i + " " + c.getTitle());
 				i++;
@@ -323,18 +398,23 @@ public class Driver {
 		}
 	}
 
+	// Description: adds a CD 
+	// parameters: String name, arraylist of CD
+	// return: nothing because the method is void
 	public static void addCD(String name, ArrayList<CD> CDList) {
 		try {
 			BufferedReader inFile = new BufferedReader(new FileReader(name.toLowerCase() + ".txt"));
 			String title = inFile.readLine();
 			int numSong = Integer.parseInt(inFile.readLine());
 			CD cd = new CD(title, numSong);
+			//adding all songs
 			for (int i = 0; i < numSong; i++) {
 				String songTitle = inFile.readLine();
 				String artist = inFile.readLine();
 				String genre = inFile.readLine();
 				int rating = Integer.parseInt(inFile.readLine());
 				String time = inFile.readLine();
+				//if time is in seconds
 				if (time.length() <= 2) {
 					cd.addSong(new Song(songTitle, artist, genre, rating, new Time(Integer.parseInt(time))));
 				}

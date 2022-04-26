@@ -1,12 +1,18 @@
-
+//******************************************************************
+//Name: Max Luo
+//Date: 4/25/2022
+//Description: This is the song class which contains the song object
+//******************************************************************
 public class Song implements Comparable<Song>{
 
+	//initalization
 	private String title;
 	private String artist;
 	private String genre;
 	private int rating;
 	private Time time;
 	
+	//getters and setters
 	public String getTitle() {
 		return title;
 	}
@@ -51,6 +57,7 @@ public class Song implements Comparable<Song>{
 		return time;
 	}
 
+	//constructor
 	public Song(String title, String artist, String genre, int rating, Time time) {
 		this.title = title;
 		this.artist = artist;
@@ -59,11 +66,15 @@ public class Song implements Comparable<Song>{
 		this.time = time;
 	}
 
+	//overriding for contains
 	public boolean equals(Object o) {
 		Song s = (Song) o;
 		return this.title.equalsIgnoreCase(s.getTitle());
 	}
 	
+	// Description: converts to seconds
+	// parameters: nothing
+	// return: nothing because the method is void
 	public int convert()
 	{
 		return time.getMinute() * 60 + time.getSeconds();
